@@ -21,10 +21,12 @@ jQuery(function ($) {
         }
     });
 
-    $("#close-sidebar").click(function () {
+    $("#close-sidebar").click(function (e) {
+        e.preventDefault();
         $(".page-wrapper").removeClass("toggled");
     });
-    $("#show-sidebar").click(function () {
+    $("#show-sidebar").click(function (e) {
+        e.preventDefault();
         $(".page-wrapper").addClass("toggled");
     });
 });
