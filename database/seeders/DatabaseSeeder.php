@@ -14,6 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        if (app()->environment() === 'production') {
+            $this->call([AdminSeeder::class]);
+        } else {
+            $this->call([
+                AdminSeeder::class
+            ]);
+        }
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

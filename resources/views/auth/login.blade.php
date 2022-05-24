@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <img src="/images/logo.svg" class="w-40 h-20 fill-current text-gray-500">
+            <img src="{{ asset('/images/logo.svg') }}" class="w-40 h-20 fill-current text-gray-500">
         </x-slot>
 
         <!-- Session Status -->
