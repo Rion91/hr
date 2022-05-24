@@ -1,9 +1,7 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
+            <img src="/images/logo.svg" class="w-40 h-20 fill-current text-gray-500">
         </x-slot>
 
         <!-- Validation Errors -->
@@ -33,7 +31,7 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
-                                required autocomplete="new-password" />
+                                required autocomplete="new-password"/>
             </div>
 
             <!-- Confirm Password -->
