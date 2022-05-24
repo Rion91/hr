@@ -7,12 +7,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-{{--    <!-- Fonts -->--}}
-{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">--}}
-
-<!-- Styles -->
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -21,37 +17,68 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         rel="stylesheet"
     />
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        rel="stylesheet"
-    />
     <!-- MDB -->
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css"
-        rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    {{--style--}}
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 <body class="font-sans antialiased">
-<div class="min-h-screen bg-gray-100">
-@include('layouts.navigation')
-
-<!-- Page Heading -->
-{{--    <header class="bg-white shadow">--}}
-{{--        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">--}}
-{{--            {{ $header }}--}}
-{{--        </div>--}}
-{{--    </header>--}}
-
+<div class="page-wrapper chiller-theme toggled">
+    {{--side-bar--}}
+    <x-side-bar/>
+    <!-- Page Heading -->
+    <div class="header-menu">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-8">
+                <div class="d-flex sm-justify-content-between justify-content-between">
+                    <a id="show-sidebar" href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <h5>@yield('header')</h5>
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Page Content -->
-    <main>
-        {{ $slot }}
-    </main>
+    <div class="py-4">
+        @yield('content')
+    </div>
+    <!-- Page Bottom -->
+    <div class="bottom-menu">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="d-flex justify-content-between">
+                    <a href="">
+                        <i class="fa fa-home"></i>
+                        <p class="mb-0">Home</p>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-home"></i>
+                        <p class="mb-0">Home</p>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-home"></i>
+                        <p class="mb-0">Home</p>
+                    </a>
+                    <a href="">
+                        <i class="fa fa-home"></i>
+                        <p class="mb-0">Home</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
 <!-- MDB -->
-<script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"
-></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- side-bar -->
+<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
