@@ -1,10 +1,12 @@
-.badge{
+.badge {
     padding: 6px;
     font-size: 12px;
 }
-.btn{
+
+.btn {
     font-size: 14px !important;
 }
+
 .btn-theme {
     color: #fff;
     background-color: #4CD185;
@@ -13,19 +15,23 @@
 .btn-theme:hover {
     color: #fff !important;
 }
-.body{
+
+.body {
     overflow-x: hidden;
 }
+
 /* --header bar-- */
 .header-bar {
     padding: 10px 0 !important;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1) !important;
 }
-.header-bar a i{
+
+.header-bar a i {
     color: #333;
 }
+
 /* --content-- */
-.content{
+.content {
     height: 85vh;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -522,7 +528,52 @@ body {
 .chiller-theme .sidebar-footer > a:last-child {
     border-right: none;
 }
+
 /*--- datatable ---*/
-.page-item.active .page-link{
+.action_icon a{
+    padding: 5px;
+    background-color: #eee;
+    border-radius: 5px;
+    line-height: 20px;
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    margin: 3px !important;
+}
+.page-item.active .page-link {
     background-color: #4CD185;
+}
+
+table.dataTable > tbody > tr.child ul.dtr-details {
+    width: 100%;
+}
+
+table.dataTable > tbody > tr.child ul.dtr-details > li {
+    text-align: left !important;
+}
+
+.paginate_button {
+    font-size: 14px !important;
+    background-color: #eee !important;
+    margin: 0px 2px;
+}
+
+@media screen and (max-width: 767px) {
+    div.dataTables_wrapper div.dataTables_filter input {
+        width: 75%;
+    }
+
+    div.dataTables_wrapper div.dataTables_filter label {
+        width: 100%;
+    }
+    div.dataTables_wrapper div.dataTables_length,
+    div.dataTables_wrapper div.dataTables_filter,
+    div.dataTables_wrapper div.dataTables_info,
+    div.dataTables_wrapper div.dataTables_paginate {
+        text-align: left;
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        justify-content: start !important;
+    }
 }

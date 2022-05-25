@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEmployee;
 use App\Models\Department;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
@@ -26,7 +27,19 @@ class EmployeeController extends Controller
                         return '<span class="badge badge-pill badge-light border border-warning">Leave</span>';
                     }
                 })
-                ->rawColumns(['is_present'])
+                ->editColumn('updated_up', function ($employee){
+                    return Carbon::parse($employee->updated_at)->format('Y-m-d H:i:s');
+                })
+                ->addColumn('action', function ($employee){
+                    $editIcon = '<a href="'. route('employee.edit', $employee->id) .'" class="text-warning" style="font-size: 20px"><i class="fas fa-edit"></i></a>';
+                    $showIcon = '<a href="'. route('employee.show', $employee->id) .'" class="text-info" style="font-size: 20px"><i class="fas fa-info-circle"></i></a>';
+
+                    return '<div class="action_icon">'.$editIcon.$showIcon.'</div>';
+                })
+                ->addColumn('plusIcon', function ($employee){
+                    return null;
+                })
+                ->rawColumns(['is_present', 'action'])
                 ->make(true);
         }
         return view('employee.index');
