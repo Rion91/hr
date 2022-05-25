@@ -29,4 +29,11 @@ jQuery(function ($) {
         e.preventDefault();
         $(".page-wrapper").addClass("toggled");
     });
+    document.addEventListener('click', function (event){
+        if (document.getElementById('show-sidebar').contains(event.target)){
+            $(".page-wrapper").addClass("toggled");
+        }else if (!document.getElementById('sidebar').contains(event.target)){
+            $(".page-wrapper").removeClass("toggled");
+        }
+    });
 });

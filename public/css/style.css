@@ -2,6 +2,9 @@
     padding: 6px;
     font-size: 12px;
 }
+.btn{
+    font-size: 14px !important;
+}
 .btn-theme {
     color: #fff;
     background-color: #4CD185;
@@ -10,8 +13,10 @@
 .btn-theme:hover {
     color: #fff !important;
 }
-
-/* --header menu-- */
+.body{
+    overflow-x: hidden;
+}
+/* --header bar-- */
 .header-bar {
     padding: 10px 0 !important;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1) !important;
@@ -19,8 +24,14 @@
 .header-bar a i{
     color: #333;
 }
+/* --content-- */
+.content{
+    height: 85vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
-/* --bottom menu--  */
+/* --bottom bar-- */
 .bottom-bar {
     width: 100%;
     position: absolute;
@@ -31,7 +42,7 @@
 
 .bottom-bar a {
     text-align: center;
-    padding: 10px;
+    padding: 5px 25px;
     color: #000;
 }
 

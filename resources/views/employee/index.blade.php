@@ -2,6 +2,9 @@
     @section('header', 'Employees')
 
     @section('content')
+        <div class="mb-2">
+            <a href="{{ route('employee.create') }}" class="btn btn-theme btn-sm"><i class="fas fa-plus-circle"></i>Create Employees</a>
+        </div>
         <div class="card">
             <dic class="card-body">
                 <table class="table table-bordered Datatable">
@@ -26,7 +29,7 @@
                     serverSide: true,
                     ajax: '{!! route('employee.index') !!}',
                     columns: [
-                        {data: 'id', name: 'id', class: 'text-center'},
+                        {data: 'employee_id', name: 'employee_id', class: 'text-center'},
                         {data: 'name', name: 'name', class: 'text-center'},
                         {data: 'email', name: 'email', class: 'text-center'},
                         {data: 'phone', name: 'phone', class: 'text-center'},

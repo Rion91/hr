@@ -19,10 +19,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     {{-- Data Table --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    {{--DateRangePicker--}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
     {{--style--}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased body">
 <div class="page-wrapper chiller-theme">
     {{--side-bar--}}
     <x-side-bar/>
@@ -41,7 +43,7 @@
         </div>
     </div>
     <!-- Page Content -->
-    <div class="py-4">
+    <div class="py-4 content">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @yield('content')
@@ -86,11 +88,29 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.0.0/mdb.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <!-- datatable -->
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js">
-</script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<!-- date range picker -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<!-- Laravel Javascript Validation -->
+<script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+<!-- sweet alert 2 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- side-bar -->
-<script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
-
+<script type="text/javascript" src="{{ asset('js/sidebar.js') }}"></script>
+<script>
+    $(function ($) {
+            @if(session('create')){
+            Swal.fire({
+                title: 'Successfully created!',
+                text: "{!! session('create') !!}",
+                icon: 'success',
+                confirmButtonText: 'Ok!'
+            })
+        }
+        @endif
+    });
+</script>
 @yield('script')
 </body>
 </html>
