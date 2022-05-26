@@ -81,6 +81,8 @@
 
 <!-- MDB -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
@@ -106,6 +108,16 @@
             Swal.fire({
                 title: 'Successfully created!',
                 text: "{!! session('create') !!}",
+                icon: 'success',
+                confirmButtonText: 'Ok!'
+            })
+        }
+            @endif
+
+            @if(session('updated')){
+            Swal.fire({
+                title: 'Successfully updated!',
+                text: "{!! session('updated') !!}",
                 icon: 'success',
                 confirmButtonText: 'Ok!'
             })

@@ -4,6 +4,7 @@
 /storage/*.key
 /public/js/app.js
 /public/css/app.css
+/public/vendor
 /vendor
 .env
 .env.backup

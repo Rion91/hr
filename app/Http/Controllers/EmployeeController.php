@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployee;
+use App\Http\Requests\UpdateEmployee;
 use App\Models\Department;
 use App\Models\User;
 use Carbon\Carbon;
@@ -45,7 +46,7 @@ class EmployeeController extends Controller
         return view('employee.index');
     }
 
-    //create employee
+    //create employee and store
     public function create()
     {
         $departments = Department::orderBy('title')->get();
@@ -59,5 +60,24 @@ class EmployeeController extends Controller
         User::create($data);
 
         return redirect()->route('employee.index')->with('create', 'Employee info successfully created.');
+    }
+
+    //edit and update
+    public function edit($id){
+        $employee = User::findOrFail($id);
+        $departments = Department::orderBy('title')->get();
+        return view('employee.edit', compact('employee', 'departments'));
+    }
+    public function update(UpdateEmployee $request, User $employee){
+        $data = $request->validated();
+        $data['password'] = Hash::make($request->password);
+        $employee->update($data);
+
+        return redirect()->route('employee.index')->with('updated', "Employee info successfully updated.");
+    }
+
+    //show
+    public function show(User $employee){
+        return view('employee.show', compact('employee'));
     }
 }
