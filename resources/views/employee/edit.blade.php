@@ -4,7 +4,8 @@
     @section('content')
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('employee.update', $employee->id) }}" method="POST" autocomplete="off"
+                <form action="{{ route('employee.update', $employee->id) }}" method="POST" enctype="multipart/form-data"
+                      autocomplete="off"
                       id="edit-form">
                     @csrf
                     @method('PUT')
@@ -76,6 +77,15 @@
                                   row="3">{{ $employee->address }}</textarea>
                     </div>
                     <div class="md-form mb-2">
+                        <label for="profile_img">Profile Image</label>
+                        <input type="file" name="profile_img" class="form-control" id="profile_img">
+                        <div class="preview_img my-2">
+                            @if($employee->profile_img)
+                                <img src="{{ $employee->profileImgPath() }}" alt="">
+                            @endif
+                        </div>
+                    </div>
+                    <div class="md-form mb-2">
                         <label for="password">Password</label>
                         <input type="text" name="password" class="form-control">
                     </div>
@@ -110,6 +120,13 @@
                     "showDropdowns": true,
                     "locale": {
                         "format": "YYYY-MM-DD"
+                    }
+                });
+                $('#profile_img').on('change', function () {
+                    var file_length = document.getElementById('profile_img').files.length;
+                    $('.preview_img').html('');
+                    for (var i = 0; i < file_length; i++) {
+                        $('.preview_img').append(`<img src='${URL.createObjectURL(event.target.files[i])}' />`)
                     }
                 });
             })

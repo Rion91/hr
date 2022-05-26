@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
 
 class EmployeeController extends Controller
@@ -28,16 +29,16 @@ class EmployeeController extends Controller
                         return '<span class="badge badge-pill badge-light border border-warning">Leave</span>';
                     }
                 })
-                ->editColumn('updated_up', function ($employee){
+                ->editColumn('updated_up', function ($employee) {
                     return Carbon::parse($employee->updated_at)->format('Y-m-d H:i:s');
                 })
-                ->addColumn('action', function ($employee){
-                    $editIcon = '<a href="'. route('employee.edit', $employee->id) .'" class="text-warning" style="font-size: 20px"><i class="fas fa-edit"></i></a>';
-                    $showIcon = '<a href="'. route('employee.show', $employee->id) .'" class="text-info" style="font-size: 20px"><i class="fas fa-info-circle"></i></a>';
+                ->addColumn('action', function ($employee) {
+                    $editIcon = '<a href="' . route('employee.edit', $employee->id) . '" class="text-warning" style="font-size: 20px"><i class="fas fa-edit"></i></a>';
+                    $showIcon = '<a href="' . route('employee.show', $employee->id) . '" class="text-info" style="font-size: 20px"><i class="fas fa-info-circle"></i></a>';
 
-                    return '<div class="action_icon">'.$editIcon.$showIcon.'</div>';
+                    return '<div class="action_icon">' . $editIcon . $showIcon . '</div>';
                 })
-                ->addColumn('plusIcon', function ($employee){
+                ->addColumn('plusIcon', function ($employee) {
                     return null;
                 })
                 ->rawColumns(['is_present', 'action'])
@@ -56,6 +57,8 @@ class EmployeeController extends Controller
     public function store(StoreEmployee $request)
     {
         $data = $request->validated();
+
+        $data['profile_img'] = $request->file('profile_img')->store('employee');
         $data['password'] = Hash::make($request->password);
         User::create($data);
 
@@ -63,21 +66,29 @@ class EmployeeController extends Controller
     }
 
     //edit and update
-    public function edit($id){
+    public function edit($id)
+    {
         $employee = User::findOrFail($id);
         $departments = Department::orderBy('title')->get();
         return view('employee.edit', compact('employee', 'departments'));
     }
-    public function update(UpdateEmployee $request, User $employee){
+
+    public function update(UpdateEmployee $request, User $employee)
+    {
         $data = $request->validated();
-        $data['password'] = Hash::make($request->password);
+        if (isset($data['profile_img'])) {
+            Storage::delete('/storage/' . $employee->profile_img);
+            $data['profile_img'] = $request->file('profile_img')->store('employee');
+        }
+        $data['password'] = $request->password ? Hash::make($request->password) : $employee->password;
         $employee->update($data);
 
         return redirect()->route('employee.index')->with('updated', "Employee info successfully updated.");
     }
 
     //show
-    public function show(User $employee){
+    public function show(User $employee)
+    {
         return view('employee.show', compact('employee'));
     }
 }

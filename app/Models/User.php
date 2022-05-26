@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 class User extends Authenticatable
 {
@@ -41,6 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function profileImgPath()
+    {
+        if($this->profile_img){
+            return asset('storage/'. $this->profile_img);
+        }
+        return null;
+    }
     public function department(){
         return $this->belongsTo(Department::class);
     }

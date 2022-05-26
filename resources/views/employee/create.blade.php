@@ -4,7 +4,8 @@
     @section('content')
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('employee.store') }}" method="POST" autocomplete="off" id="create-form">
+                <form action="{{ route('employee.store') }}" method="POST" enctype="multipart/form-data"
+                      autocomplete="off" id="create-form">
                     @csrf
                     <div class="md-form mb-2">
                         <label for="employee_id">Employee ID</label>
@@ -61,6 +62,13 @@
                         <textarea name="address" class="md-textarea form-control" row="3"></textarea>
                     </div>
                     <div class="md-form mb-2">
+                        <label for="profile_img">Profile Image</label>
+                        <input type="file" name="profile_img" class="form-control" id="profile_img">
+                        <div class="preview_img">
+
+                        </div>
+                    </div>
+                    <div class="md-form mb-2">
                         <label for="password">Password</label>
                         <input type="text" name="password" class="form-control">
                     </div>
@@ -95,6 +103,13 @@
                     "showDropdowns": true,
                     "locale": {
                         "format": "YYYY-MM-DD"
+                    }
+                });
+                $('#profile_img').on('change', function () {
+                    var file_length = document.getElementById('profile_img').files.length;
+                    $('.preview_img').html('');
+                    for (var i = 0; i < file_length; i++) {
+                        $('.preview_img').append(`<img src='${URL.createObjectURL(event.target.files[i])}' />`)
                     }
                 });
             })
