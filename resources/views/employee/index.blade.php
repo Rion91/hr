@@ -8,7 +8,7 @@
         </div>
         <div class="card">
             <dic class="card-body">
-                <table class="table table-bordered border-gray-200 Datatable" style="width: 100%">
+                <table class="table table-bordered table-hover border-gray-200 Datatable" style="width: 100%">
                     <thead class="bg-gray-100">
                     <th class="text-center noOrder noSearch"></th>
                     <th class="text-center border border-l-2">Employee ID</th>
@@ -28,7 +28,7 @@
     @section('script')
         <script>
             $(document).ready(function () {
-                $('.Datatable').DataTable({
+                var table = $('.Datatable').DataTable({
                     responsive: true,
                     processing: true,
                     serverSide: true,
@@ -71,6 +71,27 @@
                         "processing": "<img src='/images/loading.gif' style='width: 50px; height: 50%;'/>"
                     },
 
+                });
+
+                $(document).on('click', '.delete-btn', function (event) {
+                    event.preventDefault();
+
+                    var id = $(this).data('id');
+                    swal({
+                        title: "Are you sure?",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                $.ajax({
+                                    method: "DELETE",
+                                    url: `/employee/${id}`,
+                                }).done(function (response) {
+                                        table.ajax.reload();
+                                    });
+                            }
+                        });
                 });
             });
         </script>

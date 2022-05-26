@@ -100,10 +100,23 @@
 <script type="text/javascript" src="{{ url('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 <!-- sweet alert 2 -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- sweet alert 1 -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- side-bar -->
 <script type="text/javascript" src="{{ asset('js/sidebar.js') }}"></script>
 <script>
     $(function ($) {
+        let token = document.head.querySelector('meta[name="csrf-token"]');
+        if(token){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': token.content
+                }
+            });
+        }else{
+            console.log('error');
+        }
+
             @if(session('create')){
             Swal.fire({
                 title: 'Successfully created!',

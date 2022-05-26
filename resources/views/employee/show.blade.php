@@ -8,7 +8,7 @@
                     <div class="col-md-6">
                         <div class="d-flex">
                             <img src="{{ $employee->profileImgPath() }}" class="profile-img" alt="">
-                            <div class="py-3 px-3">
+                            <div class="py-4 px-3">
                                 <h4>{{ ucwords($employee->name) }}</h4>
                                 <p class="text-muted mb-1">{{ $employee->employee_id }}</p>
                                 <p class="text-muted mb-1">{{ $employee->department ? $employee->department->title : '-' }}</p>

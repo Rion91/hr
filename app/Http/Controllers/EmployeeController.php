@@ -35,8 +35,9 @@ class EmployeeController extends Controller
                 ->addColumn('action', function ($employee) {
                     $editIcon = '<a href="' . route('employee.edit', $employee->id) . '" class="text-warning" style="font-size: 20px"><i class="fas fa-edit"></i></a>';
                     $showIcon = '<a href="' . route('employee.show', $employee->id) . '" class="text-info" style="font-size: 20px"><i class="fas fa-info-circle"></i></a>';
+                    $deleteIcon = '<a href="#" class="text-danger delete-btn" data-id="'.$employee->id.'" style="font-size: 20px"><i class="fas fa-trash-alt"></i></a>';
 
-                    return '<div class="action_icon">' . $editIcon . $showIcon . '</div>';
+                    return '<div class="action_icon">' . $editIcon . $showIcon . $deleteIcon .'</div>';
                 })
                 ->addColumn('plusIcon', function ($employee) {
                     return null;
@@ -76,8 +77,8 @@ class EmployeeController extends Controller
     public function update(UpdateEmployee $request, User $employee)
     {
         $data = $request->validated();
-        if (isset($data['profile_img'])) {
-            Storage::delete('/storage/' . $employee->profile_img);
+        if (request()->hasFile('profile_img')) {
+            Storage::delete('storage/' . $employee->profile_img);
             $data['profile_img'] = $request->file('profile_img')->store('employee');
         }
         $data['password'] = $request->password ? Hash::make($request->password) : $employee->password;
@@ -90,5 +91,11 @@ class EmployeeController extends Controller
     public function show(User $employee)
     {
         return view('employee.show', compact('employee'));
+    }
+
+    //delete
+    public function destroy(User $employee){
+        $employee->delete();
+        return 'success';
     }
 }

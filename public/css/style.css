@@ -18,10 +18,12 @@
 
 .body {
     overflow-x: hidden;
+    background: #edf2f6;
 }
 
-/* --header bar-- */
+/* --header bar-- app-bar*/
 .header-bar {
+    background: #fff;
     padding: 10px 0 !important;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1) !important;
 }

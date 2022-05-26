@@ -17,9 +17,17 @@ class AdminSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'admin',
+            'employee_id' => 'Admin001',
+            'name' => 'SuperAdmin',
             'email' => 'admin@gmail.com',
-            'phone' => '09252759590',
+            'phone' => '09123456789',
+            'nrc_number' => '167540',
+            'birthday' => '2000-11-09',
+            'department_id' => 1,
+            'gender' => 'male',
+            'date_of_join' => '2022-05-26',
+            'is_present' => 1,
+            'address'=> 'Hlaing Township, Yangon',
             'password' => Hash::make('password'),
         ]);
     }

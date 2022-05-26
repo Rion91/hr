@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             $this->call([AdminSeeder::class]);
         } else {
             $this->call([
-                AdminSeeder::class
+                AdminSeeder::class,
+                DepartmentSeeder::class
             ]);
         }
         // \App\Models\User::factory(10)->create();
