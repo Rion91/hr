@@ -19,6 +19,14 @@ class EmployeeController extends Controller
         if ($request->ajax()) {
             $employees = User::with('department');
             return DataTables::of($employees)
+                ->filterColumn('department_name', function ($query, $key) {
+                    $query->whereHas('department', function ($query) use ($key) {
+                        $query->where('title', 'LIKE', '%' . $key . '%');
+                    });
+                })
+                ->editColumn('profile_img', function ($employee) {
+                    return '<img src="' . $employee->profileImgPath() . '" class="profile-thumbnail"><p class="my-1">' . $employee->name . '</p>';
+                })
                 ->addColumn('department_name', function ($employee) {
                     return $employee->department ? $employee->department->title : '-';
                 })
@@ -33,16 +41,16 @@ class EmployeeController extends Controller
                     return Carbon::parse($employee->updated_at)->format('Y-m-d H:i:s');
                 })
                 ->addColumn('action', function ($employee) {
-                    $editIcon = '<a href="' . route('employee.edit', $employee->id) . '" class="text-warning" style="font-size: 20px"><i class="fas fa-edit"></i></a>';
-                    $showIcon = '<a href="' . route('employee.show', $employee->id) . '" class="text-info" style="font-size: 20px"><i class="fas fa-info-circle"></i></a>';
-                    $deleteIcon = '<a href="#" class="text-danger delete-btn" data-id="'.$employee->id.'" style="font-size: 20px"><i class="fas fa-trash-alt"></i></a>';
+                    $editIcon = '<a href="' . route('employee.edit', $employee->id) . '" class="text-warning" ><i class="fas fa-edit"></i></a>';
+                    $showIcon = '<a href="' . route('employee.show', $employee->id) . '" class="text-info" ><i class="fas fa-info-circle"></i></a>';
+                    $deleteIcon = '<a href="#" class="text-danger delete-btn" data-id="' . $employee->id . '" ><i class="fas fa-trash-alt"></i></a>';
 
-                    return '<div class="action_icon">' . $editIcon . $showIcon . $deleteIcon .'</div>';
+                    return '<div class="action_icon">' . $editIcon . $showIcon . $deleteIcon . '</div>';
                 })
                 ->addColumn('plusIcon', function ($employee) {
                     return null;
                 })
-                ->rawColumns(['is_present', 'action'])
+                ->rawColumns(['profile_img', 'is_present', 'action'])
                 ->make(true);
         }
         return view('employee.index');
@@ -94,7 +102,8 @@ class EmployeeController extends Controller
     }
 
     //delete
-    public function destroy(User $employee){
+    public function destroy(User $employee)
+    {
         $employee->delete();
         return 'success';
     }

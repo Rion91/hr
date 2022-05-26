@@ -9,7 +9,7 @@
 
 .btn-theme {
     color: #fff;
-    background-color: #4CD185;
+    background-color: #4CD195;
 }
 
 .btn-theme:hover {
@@ -19,6 +19,10 @@
 .body {
     overflow-x: hidden;
     background: #edf2f6;
+}
+
+.table td, .table th {
+    vertical-align: middle ;
 }
 
 /* --header bar-- app-bar*/
@@ -533,6 +537,12 @@ body {
 }
 
 /*--- datatable ---*/
+mark{
+    background: #4CD195;
+    color: black;
+    padding: 0px;
+
+}
 .action_icon a{
     padding: 5px;
     background-color: #eee;
@@ -542,9 +552,11 @@ body {
     width: 32px;
     display: inline-block;
     margin: 3px !important;
+    text-align: center;
+    font-size: 20px;
 }
 .page-item.active .page-link {
-    background-color: #4CD185;
+    background-color: #4CD195;
 }
 
 table.dataTable > tbody > tr.child ul.dtr-details {
@@ -592,7 +604,14 @@ table.dataTable > tbody > tr.child ul.dtr-details > li {
     width: 140px;
     height: 140px;
     border-radius: 100%;
-    border: 1px solid #4cd185;
+    border: 1px solid #4cd195;
+    padding: 3px;
+}
+.profile-thumbnail {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
     padding: 3px;
 }
 .dash-border {

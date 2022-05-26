@@ -11,8 +11,8 @@
                 <table class="table table-bordered table-hover border-gray-200 Datatable" style="width: 100%">
                     <thead class="bg-gray-100">
                     <th class="text-center noOrder noSearch"></th>
+                    <th class="text-center noOrder"></th>
                     <th class="text-center border border-l-2">Employee ID</th>
-                    <th class="text-center">Name</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Phone</th>
                     <th class="text-center">Department</th>
@@ -29,14 +29,11 @@
         <script>
             $(document).ready(function () {
                 var table = $('.Datatable').DataTable({
-                    responsive: true,
-                    processing: true,
-                    serverSide: true,
                     ajax: '{!! route('employee.index') !!}',
                     columns: [
                         {data: 'plusIcon', name: 'plusIcon', class: "text-center"},
+                        {data: 'profile_img', name: 'profile_img', class: 'text-center'},
                         {data: 'employee_id', name: 'employee_id', class: 'text-center border border-l-2'},
-                        {data: 'name', name: 'name', class: 'text-center'},
                         {data: 'email', name: 'email', class: 'text-center'},
                         {data: 'phone', name: 'phone', class: 'text-center'},
                         {data: 'department_name', name: 'department_name', class: 'text-center'},
@@ -45,31 +42,6 @@
                         {data: 'updated_at', name: 'updated_at', class: 'text-center'}
                     ],
                     order: [[8, "desc"]],
-                    columnDefs: [
-                        {
-                            "targets": "hidden",
-                            "visible": false,
-                        },
-                        {
-                            "targets": [0],
-                            "class": "control",
-                        },
-                        {
-                            "targets": "noOrder",
-                            "orderable": false,
-                        },
-                        {
-                            "targets": "noSearch",
-                            "searchable": false,
-                        }
-                    ],
-                    language: {
-                        "paginate": {
-                            "next": "<i class='fa-solid fa-angle-right'></i>",
-                            "previous": "<i class='fa-solid fa-angle-left'></i>"
-                        },
-                        "processing": "<img src='/images/loading.gif' style='width: 50px; height: 50%;'/>"
-                    },
 
                 });
 

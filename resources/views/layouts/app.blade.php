@@ -34,9 +34,15 @@
         <div class="d-flex justify-content-center">
             <div class="col-md-8">
                 <div class="d-flex sm-justify-content-between justify-content-between">
-                    <a id="show-sidebar" href="#">
-                        <i class="fas fa-bars"></i>
-                    </a>
+                    @if(request()->is('/'))
+                        <a id="show-sidebar" href="#">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    @else
+                        <a id="back-btn" href="#">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    @endif
                     <h5 class="mb-0">@yield('header')</h5>
                     <a href=""></a>
                 </div>
@@ -92,7 +98,10 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <!-- datatable -->
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.13/features/mark.js/datatables.mark.js"></script>
+<script src="https://cdn.jsdelivr.net/g/mark.js(jquery.mark.min.js)"></script>
 <!-- date range picker -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -107,13 +116,13 @@
 <script>
     $(function ($) {
         let token = document.head.querySelector('meta[name="csrf-token"]');
-        if(token){
+        if (token) {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': token.content
                 }
             });
-        }else{
+        } else {
             console.log('error');
         }
 
@@ -136,6 +145,46 @@
             })
         }
         @endif
+
+        //datatable defaults
+        $.extend(true, $.fn.dataTable.defaults, {
+            mark: true,
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            columnDefs: [
+                {
+                    "targets": "hidden",
+                    "visible": false,
+                },
+                {
+                    "targets": [0],
+                    "class": "control",
+                },
+                {
+                    "targets": "noOrder",
+                    "orderable": false,
+                },
+                {
+                    "targets": "noSearch",
+                    "searchable": false,
+                }
+            ],
+            language: {
+                "paginate": {
+                    "next": "<i class='fa-solid fa-angle-right'></i>",
+                    "previous": "<i class='fa-solid fa-angle-left'></i>"
+                },
+                "processing": "<img src='/images/loading.gif' style='width: 50px; height: 50%;'/>"
+            },
+        });
+
+        //back btn
+        $('#back-btn').on('click', function (e){
+            e.preventDefault();
+            window.history.go(-1);
+            return false;
+        });
     });
 </script>
 @yield('script')
