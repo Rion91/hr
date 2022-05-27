@@ -17,8 +17,8 @@ class DepartmentController extends Controller
         if ($request->ajax()) {
             $departments = Department::query();
             return DataTables::of($departments)
-                ->editColumn('updated_at', function ($each) {
-                    return Carbon::parse($each->updated_at)->format('Y-m-d H:i:s');
+                ->editColumn('updated_at', function ($department) {
+                    return Carbon::parse($department->updated_at)->format('Y-m-d H:i:s');
                 })
                 ->addColumn('action', function ($department) {
                     $editIcon = '<a href="' . route('department.edit', $department->id) . '" class="text-warning" ><i class="fas fa-edit"></i></a>';

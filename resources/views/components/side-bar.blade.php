@@ -13,8 +13,9 @@
                      alt="User picture">
             </div>
             <div class="user-info">
-          <span class="user-name">{{ auth()->user()->name }}</span>
-                <span class="user-role">{{ auth()->user()->department ? auth()->user()->department->title : "NO Department " }}</span>
+                <span class="user-name">{{ auth()->user()->name }}</span>
+                <span
+                    class="user-role">{{ auth()->user()->department ? auth()->user()->department->title : "NO Department " }}</span>
                 <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>
@@ -39,27 +40,17 @@
                         <span>Employees</span>
                     </a>
                 </li>
-                <li class="sidebar-dropdown">
+                <li>
                     <a href="{{ route('department.index') }}">
                         <i class="fa fa-sitemap"></i>
                         <span>Department</span>
                     </a>
-                    <div class="sidebar-submenu">
-                        <ul>
-                            <li>
-                                <a href="#">Pie chart</a>
-                            </li>
-                            <li>
-                                <a href="#">Line chart</a>
-                            </li>
-                            <li>
-                                <a href="#">Bar chart</a>
-                            </li>
-                            <li>
-                                <a href="#">Histogram</a>
-                            </li>
-                        </ul>
-                    </div>
+                </li>
+                <li>
+                    <a href="{{ route('role.index') }}">
+                        <i class="fa fa-shield"></i>
+                        <span>Role</span>
+                    </a>
                 </li>
                 <li class="sidebar-dropdown">
                     <a href="#">
