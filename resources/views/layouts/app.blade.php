@@ -62,21 +62,21 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="d-flex justify-content-between">
-                    <a href="">
+                    <a href="{{ route('dashboard') }}">
                         <i class="fa fa-home"></i>
                         <p class="mb-0">Home</p>
+                    </a>
+                    <a href="{{ route('dashboard') }}">
+                        <i class="fa fa-tachometer-alt"></i>
+                        <p class="mb-0">Dashboard</p>
                     </a>
                     <a href="">
                         <i class="fa fa-home"></i>
                         <p class="mb-0">Home</p>
                     </a>
-                    <a href="">
-                        <i class="fa fa-home"></i>
-                        <p class="mb-0">Home</p>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-home"></i>
-                        <p class="mb-0">Home</p>
+                    <a href="{{ route('profile.index')}}">
+                        <i class="fa fa-user-alt"></i>
+                        <p class="mb-0">Profile</p>
                     </a>
                 </div>
             </div>

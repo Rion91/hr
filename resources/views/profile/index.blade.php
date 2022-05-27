@@ -1,5 +1,5 @@
 <x-app-layout>
-    @section('header', 'Employee Info')
+    @section('header', 'Profile')
 
     @section('content')
         <div class="card">

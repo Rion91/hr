@@ -1,14 +1,34 @@
 <x-app-layout>
     @section('header', 'Hr Hub')
     @section('content')
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        You're logged in!
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <img src="{{ $employee->profileImgPath() }}" class="profile-img" alt="">
+                            <div class="py-4 px-3">
+                                <h4>{{ ucwords($employee->name) }}</h4>
+                                <p class="mb-2">
+                                    <span class="text-muted">
+                                        {{ $employee->employee_id }}
+                                    </span>
+                                    <span class="text-theme">
+                                       | {{ $employee->phone }}
+                                    </span>
+                                </p>
+                                <p class="text-muted mb-2">
+                                    <span class="badge badge-pill badge-light border">
+                                        {{ $employee->department ? $employee->department->title : '-' }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
     @endsection
 </x-app-layout>

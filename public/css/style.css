@@ -1,6 +1,7 @@
 .badge {
-    padding: 6px;
+    padding: 6px 5px 6px;
     font-size: 12px;
+    box-shadow: none !important;
 }
 
 .btn {
@@ -10,6 +11,9 @@
 .btn-theme {
     color: #fff;
     background-color: #4CD195;
+}
+.text-theme{
+    color: #4CD195;
 }
 
 .btn-theme:hover {
@@ -239,6 +243,9 @@ body {
     object-fit: cover;
     height: 100%;
     width: 100%;
+    background: #eee;
+    padding: 2px;
+    border-radius: 10px;
 }
 
 .sidebar-wrapper .sidebar-header .user-info {
@@ -462,13 +469,13 @@ body {
 /*-----------------------------chiller-theme-------------------------------------------------*/
 
 .chiller-theme .sidebar-wrapper {
-    background: #31353D;
+    background: #2D3747;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-header,
 .chiller-theme .sidebar-wrapper .sidebar-search,
 .chiller-theme .sidebar-wrapper .sidebar-menu {
-    border-top: 1px solid #3a3f48;
+    border-top: 1px solid #2D3747;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu,
@@ -507,7 +514,7 @@ body {
 .chiller-theme .sidebar-wrapper .sidebar-dropdown .sidebar-submenu li a:hover:before,
 .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu:focus + span,
 .chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active a i {
-    color: #16c7ff;
+    color: #4cd195;
     text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
 }
 
@@ -601,11 +608,12 @@ table.dataTable > tbody > tr.child ul.dtr-details > li {
     border: 1px solid #ddd;
 }
 .profile-img {
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
     border-radius: 100%;
     border: 1px solid #4cd195;
     padding: 3px;
+    display: inline;
 }
 .profile-thumbnail {
     width: 70px;
