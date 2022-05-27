@@ -48,10 +48,17 @@
                 </li>
                 <li>
                     <a href="{{ route('role.index') }}">
-                        <i class="fa fa-shield"></i>
+                        <i class="fa fa-user-shield"></i>
                         <span>Role</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('permission.index') }}">
+                        <i class="fa fa-shield"></i>
+                        <span>Permission</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="fa fa-globe"></i>

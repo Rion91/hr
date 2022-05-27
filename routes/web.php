@@ -3,6 +3,7 @@
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,8 @@ Route::middleware('auth')->group(function(){
     Route::resource('department', DepartmentController::class);
 
     Route::resource('role', RoleController::class);
+
+    Route::resource('permission', PermissionController::class);
 });
 
 
