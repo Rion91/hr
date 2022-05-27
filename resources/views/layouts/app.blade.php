@@ -115,6 +115,15 @@
 <script type="text/javascript" src="{{ asset('js/sidebar.js') }}"></script>
 <script>
     $(function ($) {
+        @if(request()->is('/'))
+        document.addEventListener('click', function (event) {
+            if (document.getElementById('show-sidebar').contains(event.target)) {
+                $(".page-wrapper").addClass("toggled");
+            } else if (!document.getElementById('sidebar').contains(event.target)) {
+                $(".page-wrapper").removeClass("toggled");
+            }
+        });
+        @endif
         let token = document.head.querySelector('meta[name="csrf-token"]');
         if (token) {
             $.ajaxSetup({
@@ -180,7 +189,7 @@
         });
 
         //back btn
-        $('#back-btn').on('click', function (e){
+        $('#back-btn').on('click', function (e) {
             e.preventDefault();
             window.history.go(-1);
             return false;

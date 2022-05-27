@@ -75,9 +75,8 @@ class EmployeeController extends Controller
     }
 
     //edit and update
-    public function edit($id)
+    public function edit(User $employee)
     {
-        $employee = User::findOrFail($id);
         $departments = Department::orderBy('title')->get();
         return view('employee.edit', compact('employee', 'departments'));
     }

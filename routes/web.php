@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
@@ -13,6 +14,8 @@ Route::middleware('auth')->group(function(){
     Route::resource('employee', EmployeeController::class);
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+
+    Route::resource('department', DepartmentController::class);
 });
 
 

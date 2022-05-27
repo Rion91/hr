@@ -38,6 +38,8 @@
                                     class="text-muted">{{$employee->nrc_number}}</span></p>
                             <p class="mb-1"><strong>Birthday</strong> : <span
                                     class="text-muted">{{$employee->birthday}}</span></p>
+                            <p class="mb-1"><strong>Date of Join</strong> : <span
+                                    class="text-muted">{{$employee->date_of_join}}</span></p>
                             <p class="mb-1"><strong>Gender</strong> : <span
                                     class="text-muted">{{ ucwords($employee->gender) }}</span>
                             </p>

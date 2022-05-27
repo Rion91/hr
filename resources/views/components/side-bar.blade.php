@@ -40,9 +40,9 @@
                     </a>
                 </li>
                 <li class="sidebar-dropdown">
-                    <a href="#">
-                        <i class="fa fa-chart-line"></i>
-                        <span>Charts</span>
+                    <a href="{{ route('department.index') }}">
+                        <i class="fa fa-sitemap"></i>
+                        <span>Department</span>
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
