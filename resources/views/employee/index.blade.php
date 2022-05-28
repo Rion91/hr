@@ -14,8 +14,9 @@
                     <th class="text-center noOrder"></th>
                     <th class="text-center border border-l-2">Employee ID</th>
                     <th class="text-center">Email</th>
-                    <th class="text-center">Phone</th>
+                    <th class="text-center hidden">Phone</th>
                     <th class="text-center">Department</th>
+                    <th class="text-center">Role or Designation</th>
                     <th class="text-center noOrder noSearch hidden">is present?</th>
                     <th class="text-center noOrder noSearch">Action</th>
                     <th class="text-center hidden noOrder noSearch">Updated at</th>
@@ -37,11 +38,12 @@
                         {data: 'email', name: 'email', class: 'text-center'},
                         {data: 'phone', name: 'phone', class: 'text-center'},
                         {data: 'department_name', name: 'department_name', class: 'text-center'},
+                        {data: 'role_name', name: 'role_name', class: 'text-center'},
                         {data: 'is_present', name: 'is_present', class: 'text-center'},
                         {data: 'action', name: 'action', class: 'text-center'},
                         {data: 'updated_at', name: 'updated_at', class: 'text-center'}
                     ],
-                    order: [[8, "desc"]],
+                    order: [[9, "desc"]],
 
                 });
 

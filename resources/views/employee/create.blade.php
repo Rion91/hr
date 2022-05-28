@@ -50,6 +50,15 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="md-form mb-2">
+                        <label for="role">Role (or) Designation</label>
+                        <select name="roles[]" id="role" class="select-hr form-control" multiple>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->name }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="md-form mb-2">
                         <label for="is_present">Is Present?</label>
                         <select name="is_present" id="is_present" class="form-control">
@@ -70,7 +79,7 @@
                     </div>
                     <div class="md-form mb-2">
                         <label for="password">Password</label>
-                        <input type="text" name="password" class="form-control">
+                        <input type="password" name="password" class="form-control">
                     </div>
                     <div class="d-flex justify-content-center mt-5 mb-3">
                         <div class="col-md-3">

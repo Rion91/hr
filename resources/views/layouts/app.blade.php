@@ -24,6 +24,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
     {{--style--}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    {{--select2--}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
 <body class="font-sans antialiased body">
 <div class="page-wrapper chiller-theme">
@@ -111,6 +114,8 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- sweet alert 1 -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- select 2 -->
+<script  src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- side-bar -->
 <script type="text/javascript" src="{{ asset('js/sidebar.js') }}"></script>
 <script>
@@ -194,6 +199,8 @@
             window.history.go(-1);
             return false;
         });
+
+        $('.select-hr').select2();
     });
 </script>
 @yield('script')

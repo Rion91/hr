@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
 class EmployeeController extends Controller
@@ -24,11 +25,18 @@ class EmployeeController extends Controller
                         $query->where('title', 'LIKE', '%' . $key . '%');
                     });
                 })
-                ->editColumn('profile_img', function ($employee) {
-                    return '<img src="' . $employee->profileImgPath() . '" class="profile-thumbnail"><p class="my-1">' . $employee->name . '</p>';
+                ->addColumn('role_name', function ($employee) {
+                    $output = '';
+                    foreach ($employee->roles as $role){
+                        $output .= '<span class="badge badge-pill badge-primary m-1">' . $role->name . '</span>';
+                    }
+                    return $output;
                 })
                 ->addColumn('department_name', function ($employee) {
                     return $employee->department ? $employee->department->title : '-';
+                })
+                ->editColumn('profile_img', function ($employee) {
+                    return '<img src="' . $employee->profileImgPath() . '" class="profile-thumbnail"><p class="my-1">' . $employee->name . '</p>';
                 })
                 ->editColumn('is_present', function ($employee) {
                     if ($employee->is_present == 1) {
@@ -50,7 +58,7 @@ class EmployeeController extends Controller
                 ->addColumn('plusIcon', function ($employee) {
                     return null;
                 })
-                ->rawColumns(['profile_img', 'is_present', 'action'])
+                ->rawColumns(['profile_img', 'is_present', 'action', 'role_name'])
                 ->make(true);
         }
         return view('employee.index');
@@ -60,7 +68,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $departments = Department::orderBy('title')->get();
-        return view('employee.create', compact('departments'));
+        $roles = Role::all();
+        return view('employee.create', compact('departments', 'roles'));
     }
 
     public function store(StoreEmployee $request)
@@ -69,7 +78,8 @@ class EmployeeController extends Controller
 
         $data['profile_img'] = $request->file('profile_img')->store('employee');
         $data['password'] = Hash::make($request->password);
-        User::create($data);
+        $user = User::create($data);
+        $user->syncRoles($request->roles);
 
         return redirect()->route('employee.index')->with('create', 'Employee info successfully created.');
     }
@@ -77,8 +87,10 @@ class EmployeeController extends Controller
     //edit and update
     public function edit(User $employee)
     {
+        $oldRoles = $employee->roles->pluck('id')->toArray();
         $departments = Department::orderBy('title')->get();
-        return view('employee.edit', compact('employee', 'departments'));
+        $roles = Role::all();
+        return view('employee.edit', compact('employee', 'oldRoles', 'departments', 'roles'));
     }
 
     public function update(UpdateEmployee $request, User $employee)
@@ -89,7 +101,9 @@ class EmployeeController extends Controller
             $data['profile_img'] = $request->file('profile_img')->store('employee');
         }
         $data['password'] = $request->password ? Hash::make($request->password) : $employee->password;
+
         $employee->update($data);
+        $employee->syncRoles($request->roles);
 
         return redirect()->route('employee.index')->with('updated', "Employee info successfully updated.");
     }

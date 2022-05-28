@@ -60,6 +60,20 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="md-form mb-2">
+                        <label for="role">Role (or) Designation</label>
+                        <select name="roles[]" id="role" class="select-hr form-control" multiple>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->name }}"
+                                        @if (in_array($role->id,$oldRoles))
+                                        selected
+                                        @endif
+                                >
+                                    {{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="md-form mb-2">
                         <label for="is_present">Is Present?</label>
                         <select name="is_present" id="is_present" class="form-control">
