@@ -34,30 +34,41 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @can('ViewEmployees')
                 <li>
                     <a href="{{ route('employee.index') }}">
                         <i class="fas fa-users"></i>
                         <span>Employees</span>
                     </a>
                 </li>
+                @endcan
+
+                @can('ViewDepartments')
                 <li>
                     <a href="{{ route('department.index') }}">
                         <i class="fa fa-sitemap"></i>
                         <span>Department</span>
                     </a>
                 </li>
+                @endcan
+
+                @can('ViewRoles')
                 <li>
                     <a href="{{ route('role.index') }}">
                         <i class="fa fa-user-shield"></i>
                         <span>Role</span>
                     </a>
                 </li>
+                @endcan
+
+                @can('ViewPermissions')
                 <li>
                     <a href="{{ route('permission.index') }}">
                         <i class="fa fa-shield"></i>
                         <span>Permission</span>
                     </a>
                 </li>
+                @endcan
 
                 <li class="sidebar-dropdown">
                     <a href="#">

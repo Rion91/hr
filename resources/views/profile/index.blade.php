@@ -2,7 +2,7 @@
     @section('header', 'Profile')
 
     @section('content')
-        <div class="card">
+        <div class="card mb-3">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -22,6 +22,13 @@
                                     <span class="badge badge-pill badge-light border">
                                         {{ $employee->department ? $employee->department->title : '-' }}
                                     </span>
+                                </p>
+                                <p class="text-muted mb-2">
+                                    @foreach($employee->roles as $role)
+                                        <span class="badge badge-pill badge-primary border">
+                                            {{ $role->name }}
+                                        </span>
+                                    @endforeach
                                 </p>
                             </div>
                         </div>
@@ -59,5 +66,38 @@
 
             </div>
         </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <a href="#" class="logout-btn btn btn-theme btn-block"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </div>
     @endsection
+
+    @section('script')
+        <script>
+            $(document).ready(function () {
+                $('.logout-btn').on('click', function (e) {
+                    e.preventDefault();
+                    swal({
+                        title: "Are you sure you want to logout?",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willLogout) => {
+                            if (willLogout) {
+                                $.ajax({
+                                    url: '/logout',
+                                    method: 'POST'
+                                }).done(function (res) {
+                                    window.location.reload();
+                                });
+                            }
+                        });
+
+                })
+            });
+        </script>
+    @endsection
+
 </x-app-layout>

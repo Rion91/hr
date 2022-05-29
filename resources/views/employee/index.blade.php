@@ -2,9 +2,12 @@
     @section('header', 'Employees')
 
     @section('content')
+
         <div class="mb-2">
-            <a href="{{ route('employee.create') }}" class="btn btn-theme btn-sm"><i class="fas fa-plus-circle"></i>Create
-                Employees</a>
+            @can('CreateEmployees')
+                <a href="{{ route('employee.create') }}" class="btn btn-theme btn-sm"><i class="fas fa-plus-circle"></i>Create
+                    Employees</a>
+            @endcan
         </div>
         <div class="card">
             <dic class="card-body">
@@ -33,7 +36,7 @@
                     ajax: '{!! route('employee.index') !!}',
                     columns: [
                         {data: 'plusIcon', name: 'plusIcon', class: "text-center"},
-                        {data: 'profile_img', name: 'profile_img', class: 'text-center'},
+                        {data: 'profile_img', name: 'profile_img',},
                         {data: 'employee_id', name: 'employee_id', class: 'text-center border border-l-2'},
                         {data: 'email', name: 'email', class: 'text-center'},
                         {data: 'phone', name: 'phone', class: 'text-center'},
@@ -62,8 +65,8 @@
                                     method: "DELETE",
                                     url: `/employee/${id}`,
                                 }).done(function (response) {
-                                        table.ajax.reload();
-                                    });
+                                    table.ajax.reload();
+                                });
                             }
                         });
                 });

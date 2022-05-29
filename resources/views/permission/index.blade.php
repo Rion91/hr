@@ -3,8 +3,11 @@
 
     @section('content')
         <div class="mb-2">
-            <a href="{{ route('permission.create') }}" class="btn btn-theme btn-sm"><i class="fas fa-plus-circle"></i>Create
-                Role</a>
+            @can('CreatePermissions')
+                <a href="{{ route('permission.create') }}" class="btn btn-theme btn-sm"><i
+                        class="fas fa-plus-circle"></i>Create
+                    Role</a>
+            @endcan
         </div>
         <div class="card">
             <dic class="card-body">
@@ -50,8 +53,8 @@
                                     method: "DELETE",
                                     url: `/permission/${id}`,
                                 }).done(function (response) {
-                                        table.ajax.reload();
-                                    });
+                                    table.ajax.reload();
+                                });
                             }
                         });
                 });

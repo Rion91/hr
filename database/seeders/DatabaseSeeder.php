@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         } else {
             $this->call([
                 AdminSeeder::class,
-                DepartmentSeeder::class
+                DepartmentSeeder::class,
+                PermissionSeeder::class
             ]);
         }
         // \App\Models\User::factory(10)->create();

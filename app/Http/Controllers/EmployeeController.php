@@ -17,6 +17,9 @@ class EmployeeController extends Controller
 {
     public function index(Request $request)
     {
+        if (!auth()->user()->can('ViewEmployees')) {
+            abort(403, 'Unauthorized action');
+        }
         if ($request->ajax()) {
             $employees = User::with('department');
             return DataTables::of($employees)
@@ -27,7 +30,7 @@ class EmployeeController extends Controller
                 })
                 ->addColumn('role_name', function ($employee) {
                     $output = '';
-                    foreach ($employee->roles as $role){
+                    foreach ($employee->roles as $role) {
                         $output .= '<span class="badge badge-pill badge-primary m-1">' . $role->name . '</span>';
                     }
                     return $output;
@@ -49,9 +52,19 @@ class EmployeeController extends Controller
                     return Carbon::parse($employee->updated_at)->format('Y-m-d H:i:s');
                 })
                 ->addColumn('action', function ($employee) {
-                    $editIcon = '<a href="' . route('employee.edit', $employee->id) . '" class="text-warning" ><i class="fas fa-edit"></i></a>';
-                    $showIcon = '<a href="' . route('employee.show', $employee->id) . '" class="text-info" ><i class="fas fa-info-circle"></i></a>';
-                    $deleteIcon = '<a href="#" class="text-danger delete-btn" data-id="' . $employee->id . '" ><i class="fas fa-trash-alt"></i></a>';
+                    $editIcon = '';
+                    $showIcon = '';
+                    $deleteIcon = '';
+
+                    if (auth()->user()->can('ViewEmployees')) {
+                        $showIcon = '<a href="' . route('employee.show', $employee->id) . '" class="text-info" ><i class="fas fa-info-circle"></i></a>';
+                    }
+                    if (auth()->user()->can('EditEmployees')) {
+                        $editIcon = '<a href="' . route('employee.edit', $employee->id) . '" class="text-warning" ><i class="fas fa-edit"></i></a>';
+                    }
+                    if (auth()->user()->can('DeleteEmployees')) {
+                        $deleteIcon = '<a href="#" class="text-danger delete-btn" data-id="' . $employee->id . '" ><i class="fas fa-trash-alt"></i></a>';
+                    }
 
                     return '<div class="action_icon">' . $editIcon . $showIcon . $deleteIcon . '</div>';
                 })
@@ -67,6 +80,9 @@ class EmployeeController extends Controller
     //create employee and store
     public function create()
     {
+        if (!auth()->user()->can('CreateEmployees')) {
+            abort(403, 'Unauthorized action');
+        }
         $departments = Department::orderBy('title')->get();
         $roles = Role::all();
         return view('employee.create', compact('departments', 'roles'));
@@ -74,6 +90,9 @@ class EmployeeController extends Controller
 
     public function store(StoreEmployee $request)
     {
+        if (!auth()->user()->can('Create Employees')) {
+            abort(403, 'Unauthorized action');
+        }
         $data = $request->validated();
 
         $data['profile_img'] = $request->file('profile_img')->store('employee');
@@ -87,6 +106,9 @@ class EmployeeController extends Controller
     //edit and update
     public function edit(User $employee)
     {
+        if (!auth()->user()->can('EditEmployees')) {
+            abort(403, 'Unauthorized action');
+        }
         $oldRoles = $employee->roles->pluck('id')->toArray();
         $departments = Department::orderBy('title')->get();
         $roles = Role::all();
@@ -95,6 +117,9 @@ class EmployeeController extends Controller
 
     public function update(UpdateEmployee $request, User $employee)
     {
+        if (!auth()->user()->can('EditEmployees')) {
+            abort(403, 'Unauthorized action');
+        }
         $data = $request->validated();
         if (request()->hasFile('profile_img')) {
             Storage::delete('storage/' . $employee->profile_img);
@@ -111,12 +136,18 @@ class EmployeeController extends Controller
     //show
     public function show(User $employee)
     {
+        if (!auth()->user()->can('ViewEmployees')) {
+            abort(403, 'Unauthorized action');
+        }
         return view('employee.show', compact('employee'));
     }
 
     //delete
     public function destroy(User $employee)
     {
+        if (!auth()->user()->can('DeleteEmployees')) {
+            abort(403, 'Unauthorized action');
+        }
         $employee->delete();
         return 'success';
     }

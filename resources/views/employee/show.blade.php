@@ -23,6 +23,13 @@
                                         {{ $employee->department ? $employee->department->title : '-' }}
                                     </span>
                                 </p>
+                                <p class="text-muted mb-2">
+                                    @foreach($employee->roles as $role)
+                                        <span class="badge badge-pill badge-primary border">
+                                            {{ $role->name }}
+                                        </span>
+                                    @endforeach
+                                </p>
                             </div>
                         </div>
                     </div>

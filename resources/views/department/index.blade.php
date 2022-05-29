@@ -3,8 +3,11 @@
 
     @section('content')
         <div class="mb-2">
-            <a href="{{ route('department.create') }}" class="btn btn-theme btn-sm"><i class="fas fa-plus-circle"></i>Create
-                Department</a>
+            @can('CreateDepartments')
+                <a href="{{ route('department.create') }}" class="btn btn-theme btn-sm"><i
+                        class="fas fa-plus-circle"></i>Create
+                    Department</a>
+            @endcan
         </div>
         <div class="card">
             <dic class="card-body">
@@ -50,8 +53,8 @@
                                     method: "DELETE",
                                     url: `/department/${id}`,
                                 }).done(function (response) {
-                                        table.ajax.reload();
-                                    });
+                                    table.ajax.reload();
+                                });
                             }
                         });
                 });
