@@ -88,6 +88,14 @@ class PermissionSeeder extends Seeder
                 'name' => 'DeleteDepartments',
                 'guard_name' => 'web',
             ],
+            [
+                'name' => 'EditCompanySetting',
+                'guard_name' => 'web',
+            ],
+            [
+                'name' => 'ShowCompanySetting',
+                'guard_name' => 'web',
+            ],
         ];
         DB::table('permissions')->insert($permissions);
     }

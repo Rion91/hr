@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanySettingController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PageController;
@@ -22,6 +23,8 @@ Route::middleware('auth')->group(function(){
     Route::resource('role', RoleController::class);
 
     Route::resource('permission', PermissionController::class);
+
+    Route::resource('company-setting', CompanySettingController::class)->only(['show', 'edit', 'update']);
 });
 
 
